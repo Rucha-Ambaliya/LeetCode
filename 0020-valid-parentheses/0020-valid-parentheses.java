@@ -5,18 +5,22 @@ class Solution {
             char ch = s.charAt(i);
             if(ch == '(' || ch == '{' || ch =='['){
                 st.push(ch);
-            } else if(st.size() < 1){
+            } 
+            else if(st.size() < 1){
                 return false;
-            } else if(ch == ')' && st.peek() == '('){
+            } 
+            else if(
+                (ch == ')' && st.peek() == '(') || 
+                (ch == '}' && st.peek() == '{') || 
+                (ch == ']' && st.peek() == '[')
+            ){
                 st.pop();
-            } else if(ch == '}' && st.peek() == '{') {
-                st.pop();
-            } else if(ch == ']' && st.peek() == '[') {
-                st.pop();
-            } else {
+            }
+            else {
                 return false;
             }
         }
+        
         if(st.size() == 0){
             return true;
         } else {
