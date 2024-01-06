@@ -10,12 +10,10 @@ class Solution {
                 if (mp.get(sChar) != tChar) {
                     return false;
                 }
-            } else {
-                if (mp.containsValue(tChar)) {
-                    return false;
-                }
-                mp.put(sChar, tChar);
+            } else if (mp.containsValue(tChar)) {
+                return false;
             }
+            mp.put(sChar, tChar);
         }
         return true;
     }
