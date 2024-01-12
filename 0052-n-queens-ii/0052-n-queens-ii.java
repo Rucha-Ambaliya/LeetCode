@@ -1,4 +1,5 @@
 class Solution {
+    
     public int totalNQueens(int n) {
         int[] numOfAns = new int[1];
         char[][] Board = new char[n][n];
@@ -10,6 +11,7 @@ class Solution {
         getSolution(Board, 0, numOfAns);
         return numOfAns[0];
     }
+    
     public void getSolution(char[][] Board, int row, int[] numOfAns){
         int n = Board.length;
         if(row == n){
