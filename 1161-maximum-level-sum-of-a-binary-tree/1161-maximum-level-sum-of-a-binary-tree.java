@@ -22,7 +22,7 @@ class Solution {
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
         q.add(null);
-        int max = Integer.MIN_VALUE;
+        int maxSum = Integer.MIN_VALUE;
         int sum = 0;
         int level = 0;
         int maxLevel = 0;
@@ -37,8 +37,8 @@ class Solution {
             else{
                 level++;
                 q.remove();
-                if(sum > max){
-                    max = sum;
+                if(sum > maxSum){
+                    maxSum = sum;
                     maxLevel = level;
                 } 
                 sum = 0;
