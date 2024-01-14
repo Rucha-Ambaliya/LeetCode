@@ -15,21 +15,29 @@
  */
 class Solution {
     public int diameterOfBinaryTree(TreeNode root) {
-        int ans = getDiameter(root);
-        return ans;
+        TreeInfo ans = getDiameter(root);
+        return ans.diam;
     }
-    public int getHeight(TreeNode root){
-        if(root == null) return 0;
-        int rHeight = getHeight(root.right);
-        int lHeight = getHeight(root.left);
-        int temp = 1 + Math.max(rHeight, lHeight);
-        return temp;
+    class TreeInfo{
+        int ht;
+        int diam;
+        TreeInfo(int ht, int diam){
+            this.ht = ht;
+            this.diam = diam;
+        }
     }
-    public int getDiameter(TreeNode root){
-        if(root == null) return 0;
-        int dia1 = getDiameter(root.right);
-        int dia2 = getDiameter(root.left);
-        int dia3 = getHeight(root.left) + getHeight(root.right);
-        return Math.max(dia3,Math.max(dia1, dia2));
+    public TreeInfo getDiameter(TreeNode root) {
+        if (root == null) return new TreeInfo(0, 0);
+
+        TreeInfo lInfo = getDiameter(root.left);
+        TreeInfo rInfo = getDiameter(root.right);
+
+        int height = Math.max(lInfo.ht, rInfo.ht) + 1;
+
+        int rootDiam = lInfo.ht + rInfo.ht;
+        
+        int diam = Math.max(Math.max(lInfo.diam, rInfo.diam), rootDiam);
+
+        return new TreeInfo(height, diam);
     }
 }
