@@ -7,7 +7,6 @@ class Solution {
                 nums[newIndex++] = nums[i];
             }
         }
-        Arrays.sort(nums, 0, newIndex);
         return newIndex;
     }
 }
