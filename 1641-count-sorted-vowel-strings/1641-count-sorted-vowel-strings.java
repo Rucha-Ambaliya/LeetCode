@@ -1,19 +1,12 @@
 class Solution {
     public int countVowelStrings(int n) {
         int[] dp = new int[n + 1];
-        return countVowelStringsHelper(n, 0, dp);
-    }
-    
-    private int countVowelStringsHelper(int n, int start, int[] dp) {
-        if (n == 0) {
-            return 1;
+        dp[0] = 1;
+        for(int i = 0; i < 5; i++){
+            for(int j = 1; j <= n; j++){
+                dp[j] += dp[j - 1];
+            }
         }
-        if(dp[n] != 0) return dp[n];
-        int count = 0;
-        for (int i = start; i < 5; i++) {
-            count += countVowelStringsHelper(n - 1, i, dp);
-        }
-        
-        return count;
+        return dp[n];
     }
 }
