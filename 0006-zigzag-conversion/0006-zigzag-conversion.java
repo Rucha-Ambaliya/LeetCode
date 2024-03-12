@@ -2,30 +2,28 @@ class Solution {
     public String convert(String s, int numRows) {
         if (numRows == 1 || s.length() <= numRows)
             return s;
-        
-        int n = s.length();
-        char[][] matrix = new char[numRows][n];
-        StringBuilder ans = new StringBuilder();
-        int i = 0, j = 0, k = 0;
-        while(k < n){
-            int cnt = 0;
-            while(cnt < numRows && k < n){
-                matrix[i++][j] = s.charAt(k++);
-                cnt++;
-            }
-            i -= 2;
-            j++;
-            while(cnt > 2 && k < n){
-                matrix[i--][j++] = s.charAt(k++);
-                cnt--;
+
+        StringBuilder[] rows = new StringBuilder[numRows];
+        for (int i = 0; i < numRows; i++) {
+            rows[i] = new StringBuilder();
+        }
+
+        int direction = 1; // 1 for down, -1 for up
+        int currentRow = 0;
+
+        for (char c : s.toCharArray()) {
+            rows[currentRow].append(c);
+            currentRow += direction;
+            if (currentRow == 0 || currentRow == numRows - 1) {
+                direction *= -1; // Change direction when reaching top or bottom row
             }
         }
-        for(i = 0; i < numRows; i++){
-            for(j = 0; j < n; j++){
-                if(matrix[i][j] != '\u0000')
-                    ans.append(matrix[i][j]);
-            }
+
+        StringBuilder result = new StringBuilder();
+        for (StringBuilder row : rows) {
+            result.append(row);
         }
-        return ans.toString();
+
+        return result.toString();
     }
 }
