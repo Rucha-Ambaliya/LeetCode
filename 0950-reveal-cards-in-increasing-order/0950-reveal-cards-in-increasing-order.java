@@ -1,0 +1,23 @@
+class Solution {
+    public int[] deckRevealedIncreasing(int[] deck) {
+        Arrays.sort(deck); // Sort the deck in increasing order
+        
+        int n = deck.length;
+        int[] result = new int[n];
+        Queue<Integer> indices = new LinkedList<>();
+        
+        for (int i = 0; i < n; i++) {
+            indices.add(i); 
+        }
+        
+        for (int card : deck) {
+            int idx = indices.remove(); 
+            result[idx] = card; 
+            if (!indices.isEmpty()) {
+                indices.add(indices.remove()); 
+            }
+        }
+        
+        return result;
+    }
+}
