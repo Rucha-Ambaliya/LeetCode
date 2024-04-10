@@ -1,6 +1,6 @@
 class Solution {
     public int[] deckRevealedIncreasing(int[] deck) {
-        Arrays.sort(deck); // Sort the deck in increasing order
+        Arrays.sort(deck); 
         
         int n = deck.length;
         int[] result = new int[n];
