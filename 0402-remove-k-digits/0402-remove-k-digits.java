@@ -3,33 +3,35 @@ class Solution {
         int n = num.length();
         if (k == n) return "0";
 
-        Stack<Character> stack = new Stack<>();
+        char[] stack = new char[n];
+        int top = -1; // Pointer to the top of the stack
 
         for (char digit : num.toCharArray()) {
-            while (k > 0 && !stack.isEmpty() && stack.peek() > digit) {
-                stack.pop();
+            while (k > 0 && top >= 0 && stack[top] > digit) {
+                top--; // Remove digits until stack is empty or top digit is smaller than current digit
                 k--;
             }
-            stack.push(digit);
+            stack[++top] = digit; // Push current digit onto the stack
         }
 
         // If k > 0, remove remaining digits from the end
         while (k > 0) {
-            stack.pop();
+            top--;
             k--;
         }
 
-        // Construct the smallest number from the stack
+        // Construct the smallest number from the array
         StringBuilder sb = new StringBuilder();
-        while (!stack.isEmpty()) {
-            sb.insert(0, stack.pop());
+        int i = 0;
+        // Skip leading zeros
+        while (i <= top && stack[i] == '0') {
+            i++;
+        }
+        // Append digits to StringBuilder
+        while (i <= top) {
+            sb.append(stack[i++]);
         }
 
-        // Remove leading zeros
-        while (sb.length() > 1 && sb.charAt(0) == '0') {
-            sb.deleteCharAt(0);
-        }
-
-        return sb.toString();
+        return sb.length() == 0 ? "0" : sb.toString();
     }
 }
