@@ -8,9 +8,9 @@ class Solution {
                 if(nums[j] == nums[i]) return true;
                 j++;
                 count++;
-                 if (count > 99999) {
-                     return false;
-                 }
+                if (count > 99999) {
+                    return false;
+                }
             }
             i++;
         }
